@@ -1,17 +1,17 @@
-package de.kaffeezusatz.finiteautomaton;
+package de.kaffeezusatz.automaton.finite;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class AutomatonTest {
+public class FiniteAutomatonTest {
 
 	@Test
 	public void testA() {
-		State z0 = new State("z0");
-		State z1 = new State("z1");
-		State z2 = new State("z2");
+		FiniteState z0 = new FiniteState("z0");
+		FiniteState z1 = new FiniteState("z1");
+		FiniteState z2 = new FiniteState("z2");
 
 		z0.setFinal();
 		
@@ -23,7 +23,7 @@ public class AutomatonTest {
 		z2.addTransition(z0, 't');
 		z2.addTransition(z2, 'v');
 		
-		Automaton automat = new Automaton(z0);
+		FiniteAutomaton automat = new FiniteAutomaton(z0);
 
 		assertTrue(automat.testWord("ptvtvvt").isValid());
 		
@@ -34,11 +34,11 @@ public class AutomatonTest {
 	
 	@Test
 	public void testB() {
-		State q0 = new State("q0");
-		State q1 = new State("q1");
-		State q2 = new State("q2");
-		State q3 = new State("q3");
-		State q4 = new State("q4");
+		FiniteState q0 = new FiniteState("q0");
+		FiniteState q1 = new FiniteState("q1");
+		FiniteState q2 = new FiniteState("q2");
+		FiniteState q3 = new FiniteState("q3");
+		FiniteState q4 = new FiniteState("q4");
 
 		q1.setFinal();
 		q2.setFinal();
@@ -52,7 +52,7 @@ public class AutomatonTest {
 		q4.addTransition(q1, 'p');
 		q4.addTransition(q4, 'v');
 		
-		Automaton automat = new Automaton(q0);
+		FiniteAutomaton automat = new FiniteAutomaton(q0);
 
 		assertTrue(automat.testWord("vptptptp").isValid());
 		
@@ -64,8 +64,8 @@ public class AutomatonTest {
 		/*
 		 * NFA
 		 */
-		State q0 = new State("q0");
-		State q1 = new State("q1");
+		FiniteState q0 = new FiniteState("q0");
+		FiniteState q1 = new FiniteState("q1");
 		
 		q1.setFinal();
 		
@@ -74,7 +74,7 @@ public class AutomatonTest {
 		q1.addTransition(q1, '1');
 		q1.addTransition(q0, '1');
 		
-		Automaton automat = new Automaton(q0);
+		FiniteAutomaton automat = new FiniteAutomaton(q0);
 		
 		assertTrue(automat.testWord("011000").isValid());
 		assertTrue(automat.testWord("0110010").isValid());

@@ -1,16 +1,16 @@
-package de.kaffeezusatz.finiteautomaton;
+package de.kaffeezusatz.automaton.finite;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Automaton {
-	private final State initial;
+public class FiniteAutomaton {
+	private final FiniteState initial;
 	
-	public Automaton(final State initial) {
+	public FiniteAutomaton(final FiniteState initial) {
 		this.initial = initial;
 	}
 	
-	public State getInitial() {
+	public FiniteState getInitial() {
 		return this.initial;
 	}
 	
@@ -18,17 +18,17 @@ public class Automaton {
 		return testWord(getInitial(), word, 0, new Result(word));
 	}
 	
-	private Result testWord(final State state, final String word, final Integer index, final Result result) {
+	private Result testWord(final FiniteState state, final String word, final Integer index, final Result result) {
 		result.addState(state);
 		
 		if (index >= word.length()) {
 			return result;
 		}
 		
-		final List<State> states = state.getState(word.charAt(index));
+		final List<FiniteState> states = state.getState(word.charAt(index));
 		
 		Result nextResult = null;
-		for (State next : states) {
+		for (FiniteState next : states) {
 			nextResult = testWord(next, word, index+1, result.clone());
 			if (nextResult.isValid()) {
 				return nextResult;
@@ -40,23 +40,23 @@ public class Automaton {
 	
 	protected class Result implements Cloneable {
 		private String word;
-		private List<State> states;
+		private List<FiniteState> states;
 
 		public Result(final String word) {
 			this.word = word;
-			this.states = new LinkedList<State>();
+			this.states = new LinkedList<FiniteState>();
 		}
 
 		public Boolean isValid() {
 			return states.get(states.size()-1).isFinal();
 		}
 
-		public State addState(State state) {
+		public FiniteState addState(FiniteState state) {
 			this.states.add(state);
 			return state;
 		}
 		
-		public List<State> getStates() {
+		public List<FiniteState> getStates() {
 			return states;
 		}
 
@@ -67,7 +67,7 @@ public class Automaton {
 		@Override
 		public Result clone() {
 			Result result = new Result(getWord());
-			for (State state : states) {
+			for (FiniteState state : states) {
 				result.addState(state);
 			}
 			return result;

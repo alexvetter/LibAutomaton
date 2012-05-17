@@ -1,16 +1,16 @@
-package de.kaffeezusatz.finiteautomaton;
+package de.kaffeezusatz.automaton.finite;
 
-public class Transition {
-	private State state;
+class FiniteTransition {
+	private FiniteState state;
 	private char c;
 
-	public Transition(final State state, final char c) {
+	public FiniteTransition(final FiniteState state, final char c) {
 		super();
 		this.state = state;
 		this.c = c;
 	}
 
-	public State getState() {
+	public FiniteState getState() {
 		return state;
 	}
 
@@ -35,10 +35,10 @@ public class Transition {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Transition)) {
+		if (!(obj instanceof FiniteTransition)) {
 			return false;
 		}
-		Transition other = (Transition) obj;
+		FiniteTransition other = (FiniteTransition) obj;
 		if (c != other.c) {
 			return false;
 		}
