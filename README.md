@@ -1,4 +1,5 @@
-==LibAutomaton==
+LibAutomaton
+============
 A simple object-oriented Java library for **PDA**, **NFA** and **DFA**.
 
 * **p**ush**d**own **a**utomaton
